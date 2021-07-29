@@ -1,38 +1,186 @@
-.App {
-  text-align: center;
+body {
+	background-color: #232323;
+	margin: 0;
+	font-family: "Montserrat";
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h1 {
+	text-align: center;
+	line-height: 1.1;
+	font-weight: normal;
+	color: white;
+	/* background-color: steelblue; */
+	margin: 0;
+	text-transform: uppercase;
+	padding: 20px 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+#colorDisplay {
+	font-size: 200%;
+}
+
+#message {
+	display: inline-block;
+	width: 20%;
+}
+
+.alert {
+  margin: 10%;
+  font-size: 1.3em;
+  position: absolute;
+}
+
+#container {
+	margin: 20px auto;
+	max-width: 600px;
+}
+
+.square {
+	width: 30%;
+	background-color: purple;
+	padding-bottom: 30%;
+	float: left;
+	margin: 1.66%;
+	border-radius: 15%;
+	transition: background 0.4s;
+	--webkit-tranition: background 0.4s;
+	--moz-tranition: background 0.4s;
+  cursor: pointer;
+}
+
+#stripe {
+	background-color: white;
+	height: 30px;
+	text-align: center;
+}
+
+.selected {
+	color: white;
+	background: steelblue;
+}
+
+button {
+	border: none;
+	background: none;
+	text-transform: uppercase;
+	height: 100%;
+	font-weight: 700;
+	color: steelblue;
+	letter-spacing: 1px;
+	font-size: inherit;
+	transition: all 0.3s;
+	--webkit-tranition: all 0.3s;
+	--moz-tranition: all 0.3s;
+	outline: none;
+}
+
+button:hover {
+	color: white;
+	background: steelblue;
+}
+.headerbox{
+	width:100vw;
+	background-color: steelblue;
+}
+.square{
+	text-align: center;
+	width:15vw;
+	height: 15vh;
+	border-radius: 10%;
+
+	background-color: transparent;
+}
+#tablebox{
+	margin : 5em auto ;
+	text-align: center;
+}
+#colortable{
+	margin : 5em auto ;
+
+}
+.switch {
+	position: relative;
+	display: inline-block;
+	width: 60px;
+	height: 20px;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  
+  .switch input { 
+	opacity: 0;
+	width: 0;
+	height: 0;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #8e7676;
+	-webkit-transition: .4s;
+	transition: .4s;
   }
-}
+  
+  .slider:before {
+	position: absolute;
+	content: "";
+	height: 26px;
+	width: 26px;
+	left: 4px;
+	bottom: 4px;
+	background-color: black;
+	-webkit-transition: .4s;
+	transition: .4s;
+  }
+  
+  input:checked + .slider {
+	background-color: steelblue;
+  }
+  
+  input:focus + .slider {
+	box-shadow: 0 0 1px steelblue;
+  }
+  
+  input:checked + .slider:before {
+	-webkit-transform: translateX(26px);
+	-ms-transform: translateX(26px);
+	transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+	border-radius: 34px;
+  }
+  
+  .slider.round:before {
+	border-radius: 50%;
+  }
+  .wrappertog{
+	margin-left: 60mm;
+	  border-color: yellow;
+	  border-style: solid;
+	  width:auto ;
+	  display: inline-block;
+  }
+  .headerbuttons{
+ background-color: rgb(21, 214, 240);
+  }
+  .wrapperbut{
+	margin-left: 108mm;
+	border-color: yellow;
+	border-style: solid;
+	width:auto ;
+	display: inline-block;
+
+  }
+  #rgb{
+	  text-align: center;
+	  margin: auto;
+	  font-size: 4em;
+  }
+  .colorspot{
+	  width:35px;
+	  height:45px;
+  }
