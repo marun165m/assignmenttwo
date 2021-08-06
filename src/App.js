@@ -1,8 +1,8 @@
 /** @format */
 import React from "react";
+import Menu from "./menu"
 import "./App.css";
 import { motion } from "framer-motion";
-import { AssistiveTouch } from "react-assistivetouch-menu";
 class App extends React.Component {
   constructor(props) {
 
@@ -19,7 +19,9 @@ class App extends React.Component {
       message: "",
       red: matches[0],
       green: matches[1],
-      blue: matches[2]
+      blue: matches[2],
+      hint:false
+
     };
   }
 
@@ -90,19 +92,32 @@ class App extends React.Component {
 
     }
   };
-  prodcolor = (index) => {
-    if (index <= this.state.level) {
-      return { backgroundColor: this.state.colors[index - 1] };
-    } else {
-      return {};
-    }
-  };
   splitpicked=(rgb1)=>{
     console.log(rgb1);
     let rgb=rgb1;
     var matches = rgb&&rgb.match(/\d+/g);
     return matches
   }
+  prodcolor = (index) => {
+    if(this.state.hint===true){
+      if (index <= this.state.level) {
+        let split=this.splitpicked(this.state.colors[index - 1]);
+        console.log(split)
+        return { backgroundImage: "linear-gradient( to right,rgb("+split[0]+",0,0),rgb(0,"+split[1]+",0),rgb(0,0,"+split[2]+" ))" };
+      } else {
+        return {};
+      }
+
+    }else{
+      if (index <= this.state.level) {
+        return { backgroundColor: this.state.colors[index - 1] };
+      } else {
+        return {};
+      }
+    }
+
+  };
+
 
   onClickColor = (e, id) => {
     if (e.target.style.backgroundColor === this.state.pickedColor) {
@@ -116,10 +131,20 @@ class App extends React.Component {
       this.setState({ message: "TRY AGAIN" });
     }
   };
+  handleHint=()=>{
+    this.setState((prev)=>{return{hint:!prev.hint}});
+    setTimeout(() => {
+      this.setState((prev)=>{return{hint:!prev.hint}});
+    }, 2000);
+
+  }
   render() {
 
-    return (
+    return (  <div> 
+           <button style={{position:"absolute",left:"0",top:"15mm" ,backgroundColor:"steelBlue",color:"white"}} onClick={this.handleHint}>Hint</button>
+
       <div className='App'>
+
         <div className='headerbox'>
           <h1>The Great </h1>
           <h3 id='rgb'>{this.state.pickedColor}</h3>
@@ -183,7 +208,6 @@ class App extends React.Component {
                     id='1'
                     className='container square'
                     whileHover={{ scale: 1.2, rotate: 90 }}
-                    whileTap={{ scale: 0.8, rotate: -90, borderRadius: "100%" }}
                   />
                 </td>
                 <td>
@@ -193,7 +217,6 @@ class App extends React.Component {
                     id='2'
                     className='container square'
                     whileHover={{ scale: 1.2, rotate: 90 }}
-                    whileTap={{ scale: 0.8, rotate: -90, borderRadius: "100%" }}
                   />
                 </td>
                 <td>
@@ -203,7 +226,6 @@ class App extends React.Component {
                     id='3'
                     className='container square'
                     whileHover={{ scale: 1.2, rotate: 90 }}
-                    whileTap={{ scale: 0.8, rotate: -90, borderRadius: "100%" }}
                   />
                 </td>
               </tr>
@@ -215,7 +237,6 @@ class App extends React.Component {
                     id='4'
                     className='container square'
                     whileHover={{ scale: 1.2, rotate: 90 }}
-                    whileTap={{ scale: 0.8, rotate: -90, borderRadius: "100%" }}
                   />
                 </td>
                 <td>
@@ -225,7 +246,6 @@ class App extends React.Component {
                     id='5'
                     className='container square'
                     whileHover={{ scale: 1.2, rotate: 90 }}
-                    whileTap={{ scale: 0.8, rotate: -90, borderRadius: "100%" }}
                   />
                 </td>
                 <td>
@@ -235,7 +255,6 @@ class App extends React.Component {
                     id='6'
                     className='container square'
                     whileHover={{ scale: 1.2, rotate: 90 }}
-                    whileTap={{ scale: 0.8, rotate: -90, borderRadius: "100%" }}
                   />
                 </td>
               </tr>
@@ -243,8 +262,7 @@ class App extends React.Component {
           </table>
 
         </div>
-          <AssistiveTouch  size="XL" behaviour="freeflow" initialPos={{ left: 0, top: 500 }} menuItems={getMenuItems(this.state.red,this.state.green,this.state.blue)}
-    />
+      </div>
       </div>
     );
   }
@@ -253,18 +271,3 @@ class App extends React.Component {
 export default App;
 
 
-function getMenuItems(a,b,c) {
-  let red= "rgb("+a+",0,0)";
-  let green="rgb(0,"+b+",0)";
-  let blue="rgb(0,0,"+c+")";
-  return [{
-      icon: <div  className="menuitem "><div style={{backgroundColor:red}} className="colorspot"></div></div>,
-      label: "red"
-    },{
-      icon: <div  className="menuitem "><div style={{backgroundColor:green}} className="colorspot"></div></div>,
-      label: "green"
-    },{
-      icon: <div   className="menuitem "><div style={{backgroundColor:blue}} className="colorspot"></div></div>,
-      label: "blue"
-    }];
-}
